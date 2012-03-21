@@ -311,6 +311,7 @@ FileETag None
   RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 </IfModule>
 
+
 # ----------------------------------------------------------------------
 
 # Option 2:
@@ -325,7 +326,10 @@ FileETag None
 #   RewriteRule ^(.*)$ http://www.%1/$1 [R=301,L]
 # </IfModule>
 
-
+# Deny access to the top-level git repo
+<IfModule mod_rewrite.c>
+  RewriteRule \.git - [F,L]
+</IfModule>
 
 # ----------------------------------------------------------------------
 # Add/remove trailing slash to (non-file) URLs
