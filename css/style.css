@@ -88,9 +88,8 @@ a:hover { color: #036; }
 
 
 body {
-	background-image: url('/pernambuco.jpg');
 	background-repeat: no-repeat;
-	text-shadow: -1px 1px 0 #fff;
+	text-shadow: -1px 1px 0 rgb(200,200,200);;
 }
 
 a {
@@ -101,7 +100,7 @@ a:hover {
 }
 
 h1,h2,h3,h4,h5 {
-	font-family: Palatino, Times New Roman, Times, serif, sans-serif;
+	font-family: Helvetica, sans-serif;
 }
 h1,h2 {
 	font-size: larger;
@@ -113,15 +112,23 @@ h1,h2 {
 }
 
 .main, #main {
-	background-color: rgba(238,238,238,.4);
+	background-color: rgba(230,230,230,.9);
 	border-style: outset;
 	border-width: 1px;
 	border-color: #ddd;
 	width: 250px;
-	margin-left: 40px;
-	margin-top: 40px;
 	padding: 20px;
 	padding-top: 10px;
+    margin: 40px auto;
+	font-family: Helvetica, sans-serif;
+
+}
+
+#canvas {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .pt {
