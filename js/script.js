@@ -19,12 +19,14 @@ var Square = function(x,y,width) {
     this.y = y;
     this.width = width;
 };
-Square.prototype.draw = function(fill) {
+Square.prototype.draw = function(fill, color) {
     if (fill) {
+        if (color) svg.fillStyle(color);
         svg.fillRect(this.x - this.width / 2, this.y - this.width / 2, this.width, this.width);
-   } else {
-       svg.strokeRect(this.x - this.width / 2, this.y - this.width / 2, this.width, this.width);
-   }
+    } else {
+        if (color) svg.strokeStyle(color);
+        svg.strokeRect(this.x - this.width / 2, this.y - this.width / 2, this.width, this.width);
+    }
 };
 
 var Circle = function(x,y, radius) {
@@ -43,6 +45,65 @@ Circle.prototype.draw = function(fill) {
     }
 };
 
+var Voxel = function(x,y,z) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+};
+
+Voxel.prototype.draw = function() {
+    // project from 3d to 2d given camera pos and angle
+    // adjust color based on depth
+    // draw in 2d grid
+    svg.fillStyle = "rgba(" + z + "," + z + "," + z + ",1)";
+    svg.fillRect(this.x, this.y);
+};
+
+function voxel_map() {
+}
+
+function golden_ratio (max) {
+    var arr = [];
+    while (max >= 1) {
+        arr.unshift(Math.round(max));
+        max = max / 1.61803398875;
+    }
+    return arr;
+}
+
+function fibonacci (max) {
+    var arr = [1,1],
+        a = 1,
+        b = 1,
+        c;
+
+    while ((c = a + b) <= max) {
+        arr.push(c);
+        a = b;
+        b = c;
+    }
+    return arr;
+}
+
+var GRID = golden_ratio(2040);
+
+var xxx = snap_to(window.innerWidth / 2 - 260);
+var yyy = snap_to(50);
+var www = snap_to(xxx + 260) - 40;
+$('.main').css({left: xxx, top: yyy, width: www});
+
+function snap_to(val, values) {
+    var lastlen, lasti, len;
+    if (typeof(values) == 'undefined') values = GRID;
+    for (i in values) {
+        len = Math.abs(val - values[i]);
+        if (lastlen != undefined && len >= lastlen) return values[lasti];
+        lastlen = len;
+        lasti = i;
+    }
+    return val;
+};
+
 function partition(opts) {
     var opts = opts || {};
     var left = opts.left || 0,
@@ -51,11 +112,11 @@ function partition(opts) {
         bottom = opts.bottom || 2040,
         color = opts.color || '#ccc';
 
-    console.log(opts);
-    var cutoff = Math.round(Math.random()*100 + 5);
-    if ((right - left) < cutoff || ( bottom - top) < cutoff) return;
+    var cutoff = Math.round(Math.random()*50 + 10);
+
+    if (Math.abs(right - left) < cutoff || Math.abs(bottom - top) < cutoff) return;
     svg.fillStyle = color;
-    svg.fillRect(left, top, right - left, bottom - top);
+    svg.fillRect(snap_to(left, GRID), snap_to(top, GRID), snap_to(right - left, GRID), snap_to(bottom - top, GRID));
 
     var opts1 = {}, opts2 = {};
     var coin1 = Math.round(Math.random());
@@ -64,14 +125,14 @@ function partition(opts) {
         opts1.top = opts2.top = top;
         opts1.bottom = opts2.bottom = bottom;
         opts1.left = left;
-        opts2.left = opts1.right = (left + ((right - left) / 2));
+        opts2.left = opts1.right = Math.round(left + ((right - left) / 2));
         opts2.right = right;
     } else { // divide horizontal
         opts1.left = opts2.left = left;
         opts1.right = opts2.right = right;
         opts1.top = top;
         opts2.bottom = bottom;
-        opts1.bottom = opts2.top = (top + ((bottom - top) / 2));
+        opts1.bottom = opts2.top = Math.round(top + ((bottom - top) / 2));
     }
     if (coin2) {
         opts1.color = '#333';
@@ -83,7 +144,7 @@ function partition(opts) {
     partition(opts1);
     partition(opts2);
 }
-partition();
+
 
 function linear_walk() {
     var objects = [];
@@ -149,4 +210,4 @@ function random_walk() {
 
     }
 }
-
+partition();

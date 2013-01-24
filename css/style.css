@@ -112,15 +112,16 @@ h1,h2 {
 }
 
 .main, #main {
+    position: absolute;
 	background-color: rgba(230,230,230,.9);
-	border-style: outset;
-	border-width: 1px;
-	border-color: #ddd;
+	/* border-style: outset; */
+	/* border-width: 1px; */
+	/* border-color: #ddd; */
 	width: 250px;
 	padding: 20px;
 	padding-top: 10px;
-    margin: 40px auto;
-	font-family: Helvetica, sans-serif;
+    /* margin: 40px auto; */
+	font-family: "Lucida Console", Helvetica, sans-serif;
 
 }
 
