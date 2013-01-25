@@ -8,11 +8,29 @@ $('#toggle-en').click(function(){
 	$('.en').show();
 });
 
-// cool generative art!
+// playing with misc generative techniques
 
 var svg = document.getElementById('canvas').getContext('2d');
 svg.fillStyle = "#ccc";
 svg.strokeStyle = "#ccc";
+var GRID = golden_ratio(2040);
+var xxx = snap_to(window.innerWidth / 2 - 260);
+var yyy = snap_to(50);
+var www = snap_to(xxx + 260) - 26;
+
+$('.main').css({left: xxx, top: yyy, width: www}).animate({opacity: 1});
+$('canvas').css({opacity: 0}).delay(100).animate({opacity: 1}, 600);
+
+window.setTimeout(refresh, 8000);
+function refresh() {
+    $('canvas').animate({opacity: 0}, {complete: function() {
+        partition(); 
+        $('canvas').animate({opacity: 1});
+    }});
+    window.setTimeout(refresh, 8000);
+}
+
+partition();
 
 var Square = function(x,y,width) {
     this.x = x;
@@ -45,6 +63,7 @@ Circle.prototype.draw = function(fill) {
     }
 };
 
+
 var Voxel = function(x,y,z) {
     this.x = x;
     this.y = y;
@@ -52,6 +71,7 @@ var Voxel = function(x,y,z) {
 };
 
 Voxel.prototype.draw = function() {
+    // TODO
     // project from 3d to 2d given camera pos and angle
     // adjust color based on depth
     // draw in 2d grid
@@ -81,13 +101,6 @@ function fibonacci (max) {
     return arr;
 }
 
-var GRID = golden_ratio(2040);
-
-var xxx = snap_to(window.innerWidth / 2 - 260);
-var yyy = snap_to(50);
-var www = snap_to(xxx + 260) - 26;
-$('.main').css({left: xxx, top: yyy, width: www}).animate({opacity: 1});
-$('canvas').css({opacity: 0}).delay(100).animate({opacity: 1}, 600);
 
 function snap_to(val, values) {
     var lastlen, lasti, len;
@@ -101,14 +114,6 @@ function snap_to(val, values) {
     return val;
 };
 
-window.setTimeout(refresh, 8000);
-function refresh() {
-    $('canvas').animate({opacity: 0}, {complete: function() {
-        partition(); 
-        $('canvas').animate({opacity: 1});
-    }});
-    window.setTimeout(refresh, 8000);
-}
 
 function partition(opts) {
     var opts = opts || {};
@@ -116,7 +121,7 @@ function partition(opts) {
         right = opts.right || 2040,
         top = opts.top || 0,
         bottom = opts.bottom || 2040,
-        color = opts.color || '#ccc';
+        color = opts.color || '#333';
 
     var cutoff = Math.round(Math.random()*50 + 10);
 
@@ -216,4 +221,4 @@ function random_walk() {
 
     }
 }
-partition();
+
