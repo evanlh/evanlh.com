@@ -16,7 +16,7 @@ svg.strokeStyle = "#ccc";
 var GRID = golden_ratio(2040);
 var xxx = snap_to(window.innerWidth / 2 - 260);
 var yyy = snap_to(50);
-var www = snap_to(xxx + 260) - 26;
+var www = snap_to(xxx + 260) - 27;
 var COLORS = ['#fff', '#333', 'rgba(211,32,12,1)', 'rgba(45, 77, 180, 1)', 'rgba(255, 206, 18, 1)'];
 $('.main').css({left: xxx, top: yyy, width: www}).animate({opacity: 1});
 $('canvas').css({opacity: 0}).delay(100).animate({opacity: 1}, 600);
