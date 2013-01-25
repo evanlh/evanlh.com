@@ -72,11 +72,7 @@ function golden_ratio (max) {
 }
 
 function fibonacci (max) {
-    var arr = [1,1],
-        a = 1,
-        b = 1,
-        c;
-
+    var arr = [1,1], a = 1, b = 1, c;
     while ((c = a + b) <= max) {
         arr.push(c);
         a = b;
@@ -89,8 +85,9 @@ var GRID = golden_ratio(2040);
 
 var xxx = snap_to(window.innerWidth / 2 - 260);
 var yyy = snap_to(50);
-var www = snap_to(xxx + 260) - 40;
-$('.main').css({left: xxx, top: yyy, width: www});
+var www = snap_to(xxx + 260) - 26;
+$('.main').css({left: xxx, top: yyy, width: www}).animate({opacity: 1});
+$('canvas').css({opacity: 0}).delay(100).animate({opacity: 1}, 600);
 
 function snap_to(val, values) {
     var lastlen, lasti, len;
@@ -103,6 +100,15 @@ function snap_to(val, values) {
     }
     return val;
 };
+
+window.setTimeout(refresh, 8000);
+function refresh() {
+    $('canvas').animate({opacity: 0}, {complete: function() {
+        partition(); 
+        $('canvas').animate({opacity: 1});
+    }});
+    window.setTimeout(refresh, 8000);
+}
 
 function partition(opts) {
     var opts = opts || {};
