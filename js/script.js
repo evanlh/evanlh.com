@@ -17,7 +17,7 @@ var GRID = golden_ratio(2040);
 var xxx = snap_to(window.innerWidth / 2 - 260);
 var yyy = snap_to(50);
 var www = snap_to(xxx + 260) - 26;
-
+var COLORS = ['#fff', '#333', 'rgba(211,32,12,1)', 'rgba(45, 77, 180, 1)', 'rgba(255, 206, 18, 1)'];
 $('.main').css({left: xxx, top: yyy, width: www}).animate({opacity: 1});
 $('canvas').css({opacity: 0}).delay(100).animate({opacity: 1}, 600);
 
@@ -115,6 +115,7 @@ function snap_to(val, values) {
 };
 
 
+
 function partition(opts) {
     var opts = opts || {};
     var left = opts.left || 0,
@@ -131,7 +132,7 @@ function partition(opts) {
 
     var opts1 = {}, opts2 = {};
     var coin1 = Math.round(Math.random());
-    var coin2 = Math.round(Math.random());
+    var color = Math.round(Math.random() * 5);
     if (coin1) { // divide vertically
         opts1.top = opts2.top = top;
         opts1.bottom = opts2.bottom = bottom;
@@ -145,13 +146,9 @@ function partition(opts) {
         opts2.bottom = bottom;
         opts1.bottom = opts2.top = Math.round(top + ((bottom - top) / 2));
     }
-    if (coin2) {
-        opts1.color = '#333';
-        opts2.color = '#fff';
-    } else {
-        opts1.color = '#fff';
-        opts2.color = '#333';
-    }
+
+    opts1.color = COLORS[color];
+    opts2.color = COLORS[0];
     partition(opts1);
     partition(opts2);
 }
