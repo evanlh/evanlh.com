@@ -51,6 +51,7 @@ var Animation = {
     width: 1200,
     height: 236,
     bit_speed: 1000,
+    bit_count: 30,
     border_size: "0",
     ease: 'cubic',
     paused: false,
@@ -201,8 +202,11 @@ var Animation = {
                     offsetx = - scrollx / 5;
                 Animation.scrolled = false;
 
-                self.voronoi.transition().duration(1000).ease('elastic').attr("transform", "translate(" + offsetx +  " " + offsety + ")");
-
+                self.voronoi
+                    .transition()
+                    .duration(1000)
+                    .ease('elastic')
+                    .attr("transform", "translate(" + offsetx +  " " + offsety + ")");
             }
         }, 50);
 
@@ -228,6 +232,16 @@ var Animation = {
                 this.bits.push(new Bit(this.nodes[node], this.nodes[node].next[randi]));
             }
         }
+
+        // if (Animation.bits.length < Animation.bit_count) {
+        //     var n = Math.floor(Math.random()*Animation.nodes.length);
+        //     if (!Animation.nodes[n].next.length) return;
+        //     randi = Math.floor(Math.random()*(Animation.nodes[n].next.length));
+        //     Animation.bits.push(new Bit(Animation.nodes[n], Animation.nodes[n].next[randi]));
+        //     Animation.update_bits();
+        //     window.setInterval(Animation.spawn_bits, Math.floor(Math.random()*1000));
+        // }
+
         // randi = Math.floor(Math.random()*(this.nodes[0].next.length));
         // this.bits.push(new Bit(this.nodes[0], this.nodes[0].next[randi]));
     },
@@ -262,17 +276,25 @@ var Animation = {
     },
     end_transition: function(d, i) {
         if (Animation.paused) return;
-        d.finish();
+
         d3.select(this)
-            .attr("cx", d.p1.x)
-            .attr("cy", d.p1.y)
-            .attr("fill", Animation.bit_color())
             .transition()
-            .duration(Animation.bit_speed)
-            .ease(Animation.ease)
-            .attr("cx", d.p2.x)
-            .attr("cy", d.p2.y)
-            .each("end", Animation.end_transition);
+            .duration(200)
+            .attr("r", "4px")
+            .each("end", function() {
+                d.finish();
+                d3.select(this)
+                    .attr("cx", d.p1.x)
+                    .attr("cy", d.p1.y)
+                    .attr("r", "3px")
+                    .attr("fill", Animation.bit_color())
+                    .transition()
+                    .duration(Animation.bit_speed)
+                    .ease(Animation.ease)
+                    .attr("cx", d.p2.x)
+                    .attr("cy", d.p2.y)
+                    .each("end", Animation.end_transition);
+                });
     },
     random_point: function() {
         var p = new Node(Math.floor(Math.random()*Animation.width), Math.floor(Math.random()*Animation.height));
