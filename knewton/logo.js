@@ -27,6 +27,7 @@ function Bit(p1, p2) {
     this.p1 = p1;
     this.p2 = p2;
     this.id = id++;
+    this.opacity = '1';
 }
 Bit.prototype.finish = function() {
     var randi;
@@ -34,14 +35,18 @@ Bit.prototype.finish = function() {
         randi = Math.floor(Math.random()*(this.p2.next.length));
         this.p1 = this.p2;
         this.p2 = this.p2.next[randi];
+        this.opacity = '1';
     } else if (this.p2.transition) {
         if (this.p2.transition.x < this.p2.x) {
             this.p1 = this.p2.transition;
             randi = Math.floor(Math.random()*(this.p1.next.length));
             this.p2 = this.p1.next[randi];
+            this.opacity = '1';
+
         } else {
             this.p1 = this.p2;
             this.p2 = this.p2.transition;
+            this.opacity = '0';
         }
     }
 };
@@ -59,7 +64,7 @@ var Animation = {
     bit_count: 30,
     bit_color: '#ff0',
     border_size: "0",
-    ease: 'cubic',
+    ease: 'linear',
     paused: false,
     finished: 0,
     nodes: [{"x":0,"y":78},{"x":0,"y":109},{"x":0,"y":135},{"x":0,"y":178},{"x":0,"y":208},{"x":86,"y":113},{"x":86,"y":150},{"x":237,"y":114},{"x":302,"y":148},{"x":383,"y":124},{"x":486,"y":112},{"x":487,"y":148},{"x":489,"y":182},{"x":662,"y":115},{"x":615,"y":148},{"x":627,"y":183},{"x":761,"y":142},{"x":859,"y":112},{"x":860,"y":147},{"x":862,"y":182},{"x":1063,"y":113},{"x":1070,"y":148},{"x":1055,"y":184},{"x":1200,"y":120},{"x":1200,"y":150},{"x":1200,"y":158},{"x":1200,"y":172}, {"x":1200, "y": 140}, {"x":1200, "y": 103}],
@@ -193,6 +198,14 @@ var Animation = {
             .attr("y1", function(d, i) { return self.nodes[d.p1].y; })
             .attr("y2", function(d, i) { return self.nodes[d.p2].y; });
     },
+    draw_text: function() {
+        var self = this,
+            text = this.svg.selectAll(".text");
+
+        text.append("path")
+            .attr("class", "mypath")
+            .attr("d", "M 0 0");
+    },
     draw_voronoi: function() {
         var self = this;
         this.voronoi = this.svg.append("g").attr("class", "voronoi");
@@ -282,7 +295,7 @@ var Animation = {
         if (Animation.finished == Animation.bits.length) {
             Animation.svg.selectAll('.bits')
                 .transition()
-                .duration(100)
+                .duration(20)
                 .attr("r", "4px")
                 .each("end", function(d, i) {
                     d.finish();
@@ -290,6 +303,7 @@ var Animation = {
                         .attr("cx", d.p1.x)
                         .attr("cy", d.p1.y)
                         .attr("r", "3px")
+                        .attr("opacity", d.opacity)
                         .transition()
                         .duration(Animation.bit_speed)
                         .ease(Animation.ease)
