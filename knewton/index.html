@@ -19,6 +19,9 @@ svg { background-color: rgb(15,37,51); }
 .blue {
     fill: rgb(52,127,184);
 }
+svg text {
+    font-family: "museo-sans-n1", "museo-sans", sans-serif;
+}
 .lightblue {
     fill: rgb(30,193,194);
 }
@@ -39,6 +42,25 @@ svg { background-color: rgb(15,37,51); }
 .lines {
     stroke: rgb(52,127,184);
 }
+
+
+#target {
+  -webkit-animation: myPathX 13s infinite;
+  -moz-animation: myPathX 13s infinite;
+  -ms-animation: myPathX 13s infinite;
+  -o-animation: myPathX 13s infinite;
+  animation: myPathX 13s infinite;
+}
+
+#target > * {
+  -webkit-animation: myPathY 13s infinite;
+  -moz-animation: myPathY 13s infinite;
+  -ms-animation: myPathY 13s infinite;
+  -o-animation: myPathY 13s infinite;
+  animation: myPathY 13s infinite;
+}
+
+
 
 </style>
 
