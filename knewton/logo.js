@@ -71,9 +71,10 @@ var Animation = (function() {
     return {
         width: 1200,
         height: 236,
-        bit_speed: 1000,
+        bit_speed: 1100,
+        bit_probability: 0.5,
         bit_color: '#ff0',
-        bit_max: 5,
+        bit_max: 9,
         bits_running: 0,
         border_size: "0",
         ease: 'linear',
@@ -118,12 +119,30 @@ var Animation = (function() {
             this.svg
                 .append("g");
 
-            // user input (for building the graph)
+            // init user input variables
+            d3.select("#easing").property("value", this.ease);
+            d3.select("#bit_max").property("value", this.bit_max);
+            d3.select("#bit_probability").property("value", this.bit_probability);
+            d3.select("#bit_speed").property("value", this.bit_speed);
+
+            // user input
             if (debug) {
                 this.svg.on("click", function(d, i) {
                     var m = d3.mouse(this);
                     console.log(m);
                     // self.nodes.push(new Node(m[0], m[1]));
+                });
+                d3.select("#easing").on("change", function() {
+                    self.ease = this.value;
+                });
+                d3.select("#bit_max").on("change", function(d, i) {
+                    self.bit_max = this.value;
+                });
+                d3.select("#bit_probability").on("change", function(d, i) {
+                    self.bit_probability = this.value;
+                });
+                d3.select("#bit_speed").on("change", function(d, i) {
+                    self.bit_speed = this.value;
                 });
             }
 
@@ -282,7 +301,7 @@ var Animation = (function() {
             //     }
             // }
             // init a bunch of bits on the first 4 nodes
-            while (this.bits.length < this.bit_max) {
+            while (this.bits.length < 30) {
                 randnode = this.nodes[Math.floor(Math.random()*4)];
                 randnext =
                     Math.floor(Math.random()*randnode.next.length);
@@ -322,7 +341,7 @@ var Animation = (function() {
         update_bits: function() {
             var self = this,
                 bits,
-                coinflip = Math.random() < 1 / 10,
+                coinflip = Math.random() < Animation.bit_probability,
                 pick = Math.floor(Math.random()*4) + 1,
                 counter = 0;
 

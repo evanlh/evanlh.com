@@ -10,9 +10,6 @@ svg { background-color: rgb(15,37,51); }
 .viewport {
     fill: transparent;
 }
-.bits  {
-/*    opacity: .4;*/
-}
 .nodes {
     fill: rgb(52,127,184);
 }
@@ -30,20 +27,15 @@ svg text {
 }
 .triangles {
     fill: transparent;
-/*    stroke: rgb(9,32,46);*/
     stroke: rgb(25,46,65);
     stroke-width: 3px;
-
 }
-
 .selected {
     fill: red;
 }
 .lines {
     stroke: rgb(52,127,184);
 }
-
-
 #target {
   -webkit-animation: myPathX 13s infinite;
   -moz-animation: myPathX 13s infinite;
@@ -51,7 +43,6 @@ svg text {
   -o-animation: myPathX 13s infinite;
   animation: myPathX 13s infinite;
 }
-
 #target > * {
   -webkit-animation: myPathY 13s infinite;
   -moz-animation: myPathY 13s infinite;
@@ -59,22 +50,39 @@ svg text {
   -o-animation: myPathY 13s infinite;
   animation: myPathY 13s infinite;
 }
-
-
-
 </style>
 
 </head>
-
 <body>
 <div class="row">
 <div class="span12">
-<div id="infastructure">
-<br><br><br><br><br><br><br><br><br><br><br>
+<div>
+
+<label for="easing">Easing</label>
+<select name="easing" id="easing">
+  <option value="linear">Linear</option>
+  <option value="quad">Quad</option>
+  <option value="cubic">Cubic</option>
+</select><br>
+
+<label for="bit_speed">Bit speed (ms)</label>
+<input type="number" name="bit_speed" id="bit_speed" min="20"
+       max="20000" value="1000"><br>
+
+<label for="bit_max">Maximum bits</label>
+<input type="number" name="bit_max" id="bit_max" min="0" max="100" value="5"><br>
+
+<label for="bit_probability">Bit fire probability</label>
+<input type="number" name="bit_probability" min="0" max="1" id="bit_probability" value="0.1"><br>
+
+<br><br><br><br><br><br>
 
 <img src="bg.png" style="position: absolute; z-index: 1; opacity: 1; margin-top: 23px;">
   <svg id="svg"></svg>
 </div>
+</div>
+</div>
+
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
