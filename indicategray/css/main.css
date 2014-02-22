@@ -106,28 +106,21 @@ a { text-decoration: none }
 }
 
 .slidesjs-previous {
-    top: -548px;
-    opacity: 0;
-    background-color: white;
-    position: relative;
-    width: 25%;
-    color: white;
-    z-index: 100;
-    display: block;
     float: left;
-    height: 700px;
 }
 .slidesjs-next {
-    top: -548px;
+    float: right;
+    right: -1px;
+}
+.slidesjs-navigation {
+    top: 0;
     opacity: 0;
     background-color: white;
-    position: relative;
+    position: absolute;
     width: 25%;
     color: white;
     z-index: 100;
     display: block;
-    float: right;
-    right: -1px;
     height: 700px;
 }
 .slidesjs-navigation:visited, .slidesjs-navigation:hover{
