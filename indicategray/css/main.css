@@ -77,6 +77,9 @@ a { text-decoration: none }
     max-width: 975px;
 }
 
+#slides {
+    height: 700px;
+}
 .gallery img {
     width: inherit;
 }
@@ -114,9 +117,6 @@ a { text-decoration: none }
     float: left;
     height: 700px;
 }
-.slidesjs-previous:hover {
-    opacity: 0.5;
-}
 .slidesjs-next {
     top: -548px;
     opacity: 0;
@@ -127,11 +127,13 @@ a { text-decoration: none }
     z-index: 100;
     display: block;
     float: right;
+    right: -1px;
     height: 700px;
-}
-.slidesjs-next:hover {
-    opacity: 0.5;
 }
 .slidesjs-navigation:visited, .slidesjs-navigation:hover{
     color: white;
+}
+.slidesjs-navigation:hover {
+    opacity: 0.5;
+    cursor:pointer;
 }
