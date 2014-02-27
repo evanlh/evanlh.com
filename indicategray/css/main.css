@@ -75,7 +75,7 @@ a { text-decoration: none }
 }
 .process .gallery {
     width:100%;
-    max-width: 975px;
+    /* max-width: 975px; */
 }
 
 #slides {
@@ -92,9 +92,10 @@ a { text-decoration: none }
 }
 .contact {
     text-align: left;
-    font-size: 12pt;
+    font-size: 22pt;
+    margin-top:-18px;
     padding-left: 63px;
-    width: 380px;
+    width: 700px;
 }
 
 .process {
