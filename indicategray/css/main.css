@@ -33,11 +33,11 @@ a { text-decoration: none }
     }
 }
 .navbar {
-    width: 14%;
+
     vertical-align: top;
     float:left;
     position:relative;
-    min-width: 160px;
+    min-width: 116px;
     display:inline-block;
 }
 .navbar ul {
@@ -48,6 +48,7 @@ a { text-decoration: none }
     padding: 0;
     padding-left: 12px;
     color: #808080;
+    margin: 18 0;
 }
 
 .navbar ul li {
@@ -129,4 +130,22 @@ a { text-decoration: none }
 .slidesjs-navigation:hover {
     opacity: 0.5;
     cursor:pointer;
+}
+@media only screen and (max-width: 480px) {
+    .logo { display:none }
+    .content {
+        display: block;
+        float: none;
+        width: 100%;
+        max-width: 480px;
+    }
+    .content .gallery { max-width: 100%; }
+    .navbar {
+        display:block;
+        float: none;
+    }
+    .navbar ul {
+        margin: 0 0;
+
+    }
 }
