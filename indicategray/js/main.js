@@ -50,6 +50,8 @@
             href = $this.attr('href');
         if (event.which == 2 || event.metaKey) { return true; }
         History.pushState(null, null, href);
+        $('.navbar a').removeClass('active');
+        $this.addClass('active');
         return false;
     });
 
