@@ -1,28 +1,14 @@
 (function() {
     var pagecache = {};
     var pageload = function() {
-        var w, h;
-        if ($('.process').length) {
-            w = h = 600;
-        } else {
-            w = h = 935;
-        }
-        console.log(w);
-        $('#slides').slidesjs({
-            width: w,
-            height: h,
-            callback: {
-                loaded: function(number) {
-                    // Show start slide in log
-                    $('#slidesjs-log .slidesjs-slide-number').text(number);
-                },
-                start: function(number) {
-                },
-                complete: function(number) {
-                    // Change slide number on animation complete
-                    $('#slidesjs-log .slidesjs-slide-number').text(number);
-                }
-            }
+        var w = 1100, h = 700;
+        // $('#slides').slidesjs({
+        //     width: w,
+        //     height: h
+        // });
+        $('#slides').slick({
+            arrows: true,
+            autoplay: true
         });
     };
 
@@ -31,16 +17,20 @@
             State = History.getState(),
             href = State.url;
 
+
         $content.animate({'opacity': 0}, function() {
-            // if (typeof pagecache[State.hash] != 'undefined') {
-            //     $('.content').empty().append(pagecache[State.hash]);
-            // } else {
                 $content.load(href + " .content >*", function(responseText) {
                     pagecache[href] = responseText;
                     History.pushState(null, null, href);
-                    $content.animate({'opacity': 1});
-                    pageload();
+                    $content.animate({'opacity': 1}, function() {
+                        pageload();
+                    });
+
                 });
+
+            // if (typeof pagecache[State.hash] != 'undefined') {
+            //     $('.content').empty().append(pagecache[State.hash]);
+            // } else {
             // }
         });
     });
@@ -54,8 +44,5 @@
         $this.addClass('active');
         return false;
     });
-
-
     pageload();
-
 })();
