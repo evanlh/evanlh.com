@@ -8,7 +8,7 @@
         // });
         $('#slides').slick({
             arrows: true,
-            autoplay: true
+            autoplay: false
         });
     };
 
