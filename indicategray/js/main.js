@@ -22,8 +22,8 @@
                 $content.load(href + " .content >*", function(responseText) {
                     pagecache[href] = responseText;
                     History.pushState(null, null, href);
+                    pageload();
                     $content.animate({'opacity': 1}, function() {
-                        pageload();
                     });
 
                 });
