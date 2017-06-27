@@ -14,5 +14,23 @@
     - name: Fail2Ban is present
       apt: name=fail2ban state=present
 
+    - name: Git is installed
+      apt: name=git state=present
+
     - name: Nginx is installed
       apt: name=nginx state=present
+
+    - name: Nginx configuration is copied
+      template: src={{item.src}} dest={{item.dest}}
+      with_items:
+        - { src: 'templates/nginx.conf', dest: '/etc/nginx/nginx.conf' }
+        - { src: 'templates/sites-available/default', dest: '/etc/nginx/sites-available/default' }
+      notify:
+        - restart nginx
+
+    - name: evanlh.com is deployed
+      git: repo=https://github.com/evanlh/evanlh.com.git dest=/var/www/html/evanlh.com version=HEAD accept_hostkey=yes
+
+  handlers:
+    - name: restart nginx
+      service: name=nginx state=restarted
