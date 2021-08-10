@@ -11,5 +11,5 @@
 1. ```brew install ansible```
 1. ```cp ansible_hosts ~/```
 1. ```echo 'export ANSIBLE_INVENTORY=~/ansible_hosts' >> ~/.zshrc```
-1. ```ansible-playbook ./playbook/setup.yml --ask-sudo-pass```
+1. ```ansible-playbook ./playbook/setup.yml --ask-become-pass```
 
