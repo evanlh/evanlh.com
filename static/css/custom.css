@@ -1,0 +1,28 @@
+#header #logo {
+    background-size: 58px 100px;
+    margin-top: -20px;
+    margin-right: 32px;
+    width: 58px;
+    height: 100px;
+    animation: filter-animation 7s ease-in-out infinite alternate-reverse;
+}
+/* modified white.scss with */
+/* #d0bbe4 */
+/* or #a295af */
+
+/* img.animated { */
+/*   animation: filter-animation 5s infinite; */
+/* } */
+
+@keyframes filter-animation {
+    0% {
+        filter: grayscale(100%);
+    }
+
+    100% {
+        filter: grayscale(0%);
+    }
+}
+
+
+Resources

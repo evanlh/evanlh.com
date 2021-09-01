@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>evanlh.com</title>
+    <link>http://evanlh.com/</link>
+    <description>Recent content on evanlh.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 05 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://evanlh.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overcoming boredom in a Software Engineering career</title>
+      <link>http://evanlh.com/posts/overcoming_engineering_boredom/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://evanlh.com/posts/overcoming_engineering_boredom/</guid>
+      <description>At many times in my career, I&amp;rsquo;ve struggled with an overwhelming sense of boredom1 that affects my day-to-day ability to do my job. How can this happen given what an infinitely deep subject computing is? I find it usually derives from the following causes:
+Causes of Boredom  The sense the work you&amp;rsquo;re doing isn&amp;rsquo;t societally relevant, that you&amp;rsquo;re merely a cog in a giant military/capitalist water-works The work you&amp;rsquo;re asked to do is tedious and unchallenging, merely a repetition of the same things you&amp;rsquo;ve done many times before The work you&amp;rsquo;re doing is challenging, but the challenge is beyond your skill level and you don&amp;rsquo;t have mentors who can point you in the right direction  Potential solutions Of the above causes, I think the least tractable is the moral/ethical one, and has led me to the greatest dissatisfaction, including at times trying alternate career paths.</description>
+    </item>
+    
+    <item>
+      <title>Bootcamper Question #1: Hash efficiency</title>
+      <link>http://evanlh.com/posts/hash_efficiency/</link>
+      <pubDate>Sun, 28 Feb 2021 00:00:00 -0500</pubDate>
+      
+      <guid>http://evanlh.com/posts/hash_efficiency/</guid>
+      <description>A friend forwarding me this question from a friend working thru a Bootcamp programming. It seemed like a great opportunity to write a post, and I would welcome similar questions:
+Question &amp;ldquo;Can you clarify how classes (and really hashes) can more efficiently use keys when the initialization definition is established?&amp;quot;
+Response This a great question and a fairly deep topic to be diving into if you&amp;rsquo;re early in your coursework. Which will make it extra fun to try answering!</description>
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>http://evanlh.com/posts/about/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 -0500</pubDate>
+      
+      <guid>http://evanlh.com/posts/about/</guid>
+      <description>The views expressed here are my own and not those of my employer.
+This is my professional online presence, so I won&amp;rsquo;t share much outside of my engineering work, but in my free time I like to play my guitar &amp;amp; Octatrack, travel, cook, read, and generally enjoy being an aerobic organism hurtling thru space on this beautiful rock.
+My focus  I am forever learning to write elegant &amp;amp; performant systems with a minimum amount of incidental complexity.</description>
+    </item>
+    
+  </channel>
+</rss>

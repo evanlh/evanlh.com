@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Bootcamper Question #1: Hash efficiency | evanlh.com</title>
+  <link rel = 'canonical' href = 'http://evanlh.com/posts/hash_efficiency/'>
+  <meta name="description" content="Hi. I&#39;ve been learning to code for about as long as I can remember. I sure do have a lot left to learn tho. Sharing here some of that journey.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="Bootcamper Question #1: Hash efficiency" />
+<meta property="og:description" content="A friend forwarding me this question from a friend working thru a Bootcamp programming. It seemed like a great opportunity to write a post, and I would welcome similar questions:
+Question &ldquo;Can you clarify how classes (and really hashes) can more efficiently use keys when the initialization definition is established?&quot;
+Response This a great question and a fairly deep topic to be diving into if you&rsquo;re early in your coursework. Which will make it extra fun to try answering!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://evanlh.com/posts/hash_efficiency/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-02-28T00:00:00-05:00" />
+<meta property="article:modified_time" content="2021-02-28T00:00:00-05:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Bootcamper Question #1: Hash efficiency"/>
+<meta name="twitter:description" content="A friend forwarding me this question from a friend working thru a Bootcamp programming. It seemed like a great opportunity to write a post, and I would welcome similar questions:
+Question &ldquo;Can you clarify how classes (and really hashes) can more efficiently use keys when the initialization definition is established?&quot;
+Response This a great question and a fairly deep topic to be diving into if you&rsquo;re early in your coursework. Which will make it extra fun to try answering!"/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="http://evanlh.com/css/styles.65de21a55c4b3a38580338f7de9460ec576dc7dcf8c3c5454d53c074571fc4cc0243fa3f782bd5fe70bc5b3672b3852ed702eb0b4a39acbb1b5868880f8317b0.css" integrity="sha512-Zd4hpVxLOjhYAzj33pRg7Fdtx9z4w8VFTVPAdFcfxMwCQ/o/eCvV/nC8WzZys4Uu1wLrC0o5rLsbWGiID4MXsA=="> 
+
+  
+   <link rel="stylesheet" href="http://evanlh.com/css/custom.css"> 
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="http://evanlh.com/images/favicon.ico" />
+
+  
+  
+  
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-24869722-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts">All posts</a></li>
+         
+        <li><a href="/posts/about/">About</a></li>
+         
+        <li><a href="/index.xml">RSS</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" http://evanlh.com/posts/about/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="http://evanlh.com/posts/overcoming_engineering_boredom/" aria-label="Next">
+            <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
+          </a>
+        </li>
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f&text=Bootcamper%20Question%20%231%3a%20Hash%20efficiency" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f&title=Bootcamper%20Question%20%231%3a%20Hash%20efficiency" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f&is_video=false&description=Bootcamper%20Question%20%231%3a%20Hash%20efficiency" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=Bootcamper%20Question%20%231%3a%20Hash%20efficiency&body=Check out this article: http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f&title=Bootcamper%20Question%20%231%3a%20Hash%20efficiency" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f&title=Bootcamper%20Question%20%231%3a%20Hash%20efficiency" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f&name=Bootcamper%20Question%20%231%3a%20Hash%20efficiency&description=A%20friend%20forwarding%20me%20this%20question%20from%20a%20friend%20working%20thru%20a%20Bootcamp%20programming.%20It%20seemed%20like%20a%20great%20opportunity%20to%20write%20a%20post%2c%20and%20I%20would%20welcome%20similar%20questions%3a%0aQuestion%20%26ldquo%3bCan%20you%20clarify%20how%20classes%20%28and%20really%20hashes%29%20can%20more%20efficiently%20use%20keys%20when%20the%20initialization%20definition%20is%20established%3f%26quot%3b%0aResponse%20This%20a%20great%20question%20and%20a%20fairly%20deep%20topic%20to%20be%20diving%20into%20if%20you%26rsquo%3bre%20early%20in%20your%20coursework.%20Which%20will%20make%20it%20extra%20fun%20to%20try%20answering%21" aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f&t=Bootcamper%20Question%20%231%3a%20Hash%20efficiency" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#question">Question</a></li>
+    <li><a href="#response">Response</a>
+      <ul>
+        <li><a href="#a-naive-dictionary">A Naive Dictionary</a></li>
+        <li><a href="#briefly-how-hash-tables-work">Briefly, how Hash Tables work</a></li>
+        <li><a href="#initialization-efficiency-and-rehashing">Initialization efficiency &amp; rehashing</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        Bootcamper Question #1: Hash efficiency
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2021-02-28 00:00:00 -0500 -0500" itemprop="datePublished">2021-02-28</time>
+          
+        </div>
+        
+        
+        
+        
+      </div>
+    </header>
+
+  
+    <div class="content" itemprop="articleBody">
+      <p>A friend forwarding me this question from a friend working thru a Bootcamp programming. It seemed like a great opportunity to write a post, and I would welcome similar questions:</p>
+<h2 id="question">Question</h2>
+<p><em>&ldquo;Can you clarify how classes (and really hashes) can more efficiently use keys when the initialization definition is established?&quot;</em></p>
+<h2 id="response">Response</h2>
+<p>This a great question and a fairly deep topic to be diving into if you&rsquo;re early in your coursework. Which will make it extra fun to try answering! However I would caution that it may not be <strong>important</strong> to know at this phase, as a fair amount of modern programming consists in trusting that the little black boxes work the way they say they do &amp; moving on to the larger task at hand. Performance and efficiency concerns are precisely where that approach can break down &amp; it&rsquo;s very valuable to be willing to open up every box, so let&rsquo;s attempt it. This whole topic can best be addressed by a course or <a href="https://algs4.cs.princeton.edu/home/">a good book</a> on data structures &amp; algorithms. Since I&rsquo;ve never taken a formal course I&rsquo;ll share the intuitions that have helped me despite that.</p>
+<p>Let&rsquo;s start with what makes hashes and classes represented as hashes efficient to begin with and then move up to why initializing them first might aid in this efficiency.</p>
+<h3 id="a-naive-dictionary">A Naive Dictionary</h3>
+<p>When you use a hash table, or any dictionary structure, you want to be able to store a <code>value</code> associated with a <code>key</code> and to retrieve that <code>value</code> when all you have is the <code>key</code>. You <strong>could</strong> do that using arrays<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// initialize our &#34;dictionary&#34;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arrayDictionary</span> <span style="color:#f92672">=</span> [];
+
+<span style="color:#75715e">// store some key,value pairs
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">arrayDictionary</span>.<span style="color:#a6e22e">push</span>([<span style="color:#e6db74">&#39;apples&#39;</span>, <span style="color:#e6db74">&#39;red&#39;</span>]);
+<span style="color:#a6e22e">arrayDictionary</span>.<span style="color:#a6e22e">push</span>([<span style="color:#e6db74">&#39;bananas&#39;</span>, <span style="color:#e6db74">&#39;yellow&#39;</span>]);
+<span style="color:#a6e22e">arrayDictionary</span>.<span style="color:#a6e22e">push</span>([<span style="color:#e6db74">&#39;oranges&#39;</span>, <span style="color:#e6db74">&#39;orange&#39;</span>]);
+
+<span style="color:#75715e">// get an arbitrary value from an array dictionary
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">key</span>) {
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">arrayDictionary</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">arrayDictionary</span>[<span style="color:#a6e22e">i</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">===</span> <span style="color:#a6e22e">key</span>) {
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">arrayDictionary</span>[<span style="color:#a6e22e">i</span>][<span style="color:#ae81ff">1</span>];
+    }
+  }
+}
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bananaColor</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;bananas&#39;</span>);
+</code></pre></div><p>Notice that when we <code>get()</code> certain elements, we have to walk thru the whole array to find the <code>value</code> associated with the last-inserted <code>key</code>. This means in the worst-case we walk the whole length of the array. We would say that the <code>get</code> operation for an <code>arrayDictionary</code> has linear-time search, or O(n) complexity in <a href="https://en.wikipedia.org/wiki/Big%5FO%5Fnotation">Big-O Notation</a>. For collections of elements which can grow extremely large, we want to avoid any operation which in the worst-case will be linear with respect to the size of the collection.</p>
+<p>To make this &amp; other performance concerns more tangible, I like to imagine the computer executing my instructions as a little man who has to run around doing the work of getting values and incrementing counters and comparing things. Even tho I can write a simple <code>for</code> loop which hides<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> the little man, the little man is still doing a lot of running around depending on how big the collection is on my behalf. I have a rough heuristic of how much work each operation is for the little man to do.<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> At each level the amount of work increases by 10-100X that of the previous level:</p>
+<ol>
+<li>Numerical addition, subtraction, comparison, and bit shift/rotation/manipulation operations</li>
+<li>Multiplication &amp; division</li>
+<li>Accessing a value from memory which hasn&rsquo;t recently been used</li>
+<li>Allocating memory</li>
+</ol>
+<h3 id="briefly-how-hash-tables-work">Briefly, how Hash Tables work</h3>
+<p>So we&rsquo;ve seen that stepping thru element of the array to get a <code>key</code>&rsquo;s <code>value</code> is inefficient, what can we do instead? What would be really nice is if something could cheaply tell us, given a <code>key</code>, what position in the array we should look at. This is essentially what a <a href="https://en.wikipedia.org/wiki/Hash%5Ffunction">hash function</a> does. It takes a data structure&ndash; the <code>key</code>&ndash; as input, and returns as output a numerical value which <strong>evenly distributes</strong> the input over a defined numerical range. Because hash functions are often implemented with a combination of multiplication and bit manipulation operations (1 &amp; 2) they should be much faster than iterating thru the array of elements (3).</p>
+<p>A hash table implementation will start life by initializing a fixed-size table to be used to store values. Inside its <code>set(key, value)</code> implementation it will use a hash function to determine where in that table to store the combined <code>key, value</code> pairs. In order to account for the probability of a hash collision&ndash; when the hash function gives two different <code>key</code> values give the same numerical position in the table&ndash; it will store them in a list much like the one shown in our <code>arrayDictionary</code> example. Iterating over this list is, of course, less efficient than calculating the precise position in the table with a hash function, which is why it&rsquo;s very important that the hash function evenly distributes the keys over the table&ndash; if it didn&rsquo;t, the values would clump in one section of the table and you would have the same performance characteristics as our naive example. This risk of collision &amp; clumping has to be balanced against our desire to not waste space with a table that&rsquo;s too large. We also don&rsquo;t want to have to rehash the table too frequently.</p>
+<h3 id="initialization-efficiency-and-rehashing">Initialization efficiency &amp; rehashing</h3>
+<p>When the hash table is created, the size of the fixed-size table is chosen, and often users are able to hint what size it should be inititalized with. This is useful because the size affects the probability of collision and therefore the probability that for a given element you will be iterating over a list&ndash; the thing we don&rsquo;t want to do&ndash; again. In order for hash tables to remain performant as more elements get added, some algorithms will re-size the table when the number of elements added exceeds twice the size of the table. This ensures that you&rsquo;re never iterating over much more than 2 elements. However, this rehashing process will itself require iterating over all elements of the collection. So declaring up-front to the hash table implementation how many elements you expect to be storing helps minimize the frequency of having to perform this rehashing process. That, finally, is I hope a decent answer to your question&ndash; by declaring the properties and methods of your class you are effectively declaring the expected size of that hash table. This assumes you are using Ruby or Python or some other language that models classes as hash tables&ndash; if you&rsquo;re using the V8 interpreter in Javascript the <a href="https://richardartoul.github.io/jekyll/update/2015/04/26/hidden-classes.html">answer is more complex</a> because it only converts objects to a hash table as a last-resort.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Technically in Javascript this example is kindof bogus because Arrays can themselves be modeled as hash tables inside the interpreter. A <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global%5FObjects/Uint8Array">UintArray8</a> would be more accurate, but it would also be more code&ndash; the wider point is that you&rsquo;re using some structure that you can only access by an integer index.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Another way of saying this is that the <code>for</code> loop <a href="https://en.wikipedia.org/wiki/Abstraction%5F(computer%5Fscience)">&ldquo;abstracts away&rdquo;</a> the little man. The little man himself is just a more-fun analogy to what the CPU is actually doing when presented with instructions in its native machine code. There are enough layers of abstraction between what you write &amp; the CPU that it&rsquo;s safer to assume you don&rsquo;t know what the little man is doing until you actually measure it using <a href="https://en.wikipedia.org/wiki/Profiling%5F(computer%5Fprogramming)">profilers</a> or <a href="https://en.wikipedia.org/wiki/Benchmark%5F(computing)">microbenchmarks</a>.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>This is an <strong>extremely</strong> rough estimate that is massively affected by the language chosen &amp; architecture being run on. The first two tiers on this table you can check against the raw <a href="https://stackoverflow.com/questions/692718/how-many-cpu-cycles-are-needed-for-each-assembly-instruction">performance characteristics of assembly language instructions</a>. The next tiers are affected by something called Data Locality which has a wonderful treatment in <a href="https://gameprogrammingpatterns.com/data-locality.html">this chapter from Game Programming Patterns</a>.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/posts">All posts</a></li>
+         
+          <li><a href="/posts/about/">About</a></li>
+         
+          <li><a href="/index.xml">RSS</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#question">Question</a></li>
+    <li><a href="#response">Response</a>
+      <ul>
+        <li><a href="#a-naive-dictionary">A Naive Dictionary</a></li>
+        <li><a href="#briefly-how-hash-tables-work">Briefly, how Hash Tables work</a></li>
+        <li><a href="#initialization-efficiency-and-rehashing">Initialization efficiency &amp; rehashing</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f&text=Bootcamper%20Question%20%231%3a%20Hash%20efficiency" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f&title=Bootcamper%20Question%20%231%3a%20Hash%20efficiency" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f&is_video=false&description=Bootcamper%20Question%20%231%3a%20Hash%20efficiency" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=Bootcamper%20Question%20%231%3a%20Hash%20efficiency&body=Check out this article: http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f&title=Bootcamper%20Question%20%231%3a%20Hash%20efficiency" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f&title=Bootcamper%20Question%20%231%3a%20Hash%20efficiency" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f&name=Bootcamper%20Question%20%231%3a%20Hash%20efficiency&description=A%20friend%20forwarding%20me%20this%20question%20from%20a%20friend%20working%20thru%20a%20Bootcamp%20programming.%20It%20seemed%20like%20a%20great%20opportunity%20to%20write%20a%20post%2c%20and%20I%20would%20welcome%20similar%20questions%3a%0aQuestion%20%26ldquo%3bCan%20you%20clarify%20how%20classes%20%28and%20really%20hashes%29%20can%20more%20efficiently%20use%20keys%20when%20the%20initialization%20definition%20is%20established%3f%26quot%3b%0aResponse%20This%20a%20great%20question%20and%20a%20fairly%20deep%20topic%20to%20be%20diving%20into%20if%20you%26rsquo%3bre%20early%20in%20your%20coursework.%20Which%20will%20make%20it%20extra%20fun%20to%20try%20answering%21" aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=http%3a%2f%2fevanlh.com%2fposts%2fhash_efficiency%2f&t=Bootcamper%20Question%20%231%3a%20Hash%20efficiency" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2021  evanlh.com 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts">All posts</a></li>
+         
+        <li><a href="/posts/about/">About</a></li>
+         
+        <li><a href="/index.xml">RSS</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+<script src=/js/code-copy.js></script>
+
+
+
+</html>
