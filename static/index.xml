@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>evanlh.com</title>
+    <title>varchar(255)</title>
     <link>http://evanlh.com/</link>
-    <description>Recent content on evanlh.com</description>
+    <description>Recent content on varchar(255)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 05 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://evanlh.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Sep 2021 00:00:00 -0400</lastBuildDate><atom:link href="http://evanlh.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A short-list of short, grokkable, &amp; influential CS papers</title>
+      <link>http://evanlh.com/posts/foundations/</link>
+      <pubDate>Sun, 19 Sep 2021 00:00:00 -0400</pubDate>
+      
+      <guid>http://evanlh.com/posts/foundations/</guid>
+      <description>This post is a running list of research papers I&amp;rsquo;m collecting for self-study with the following qualities:
+ They include source code [S] or (at minimum) pseudo-code [P] of the core insight of the system / design / algorithm. They do not overwhelm the reader with mathematical notation. The majority are, by my highly subjective account, &amp;ldquo;foundational&amp;rdquo; papers, in that they have had some important influence on their respective subdisciplines. Most are less than 30 pages  Languages &amp;amp; Runtimes The Cuneiform Tablets of 2015, Nguyen &amp;amp; Kay [P] This paper is not really &amp;lsquo;foundational&amp;rsquo;, but it inspired this list.</description>
+    </item>
+    
     <item>
       <title>Overcoming boredom in a Software Engineering career</title>
       <link>http://evanlh.com/posts/overcoming_engineering_boredom/</link>
