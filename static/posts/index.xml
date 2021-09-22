@@ -14,7 +14,7 @@
       
       <guid>http://evanlh.com/posts/foundations/</guid>
       <description>This post is a running list of research papers I&amp;rsquo;m collecting for self-study with the following qualities:
- They include source code [S] or (at minimum) pseudo-code [P] of the core insight of the system / design / algorithm. They do not overwhelm the reader with mathematical notation. The majority are, by my highly subjective account, &amp;ldquo;foundational&amp;rdquo; papers, in that they have had some important influence on their respective subdisciplines. Most are less than 30 pages  Languages &amp;amp; Runtimes The Cuneiform Tablets of 2015, Nguyen &amp;amp; Kay [P] This paper is not really &amp;lsquo;foundational&amp;rsquo;, but it inspired this list.</description>
+ They include source code [S] or (at minimum) pseudo-code [P] of the core insight of the system / design / algorithm. They do not overwhelm the reader with mathematical notation. The majority are, by my highly subjective account, &amp;ldquo;foundational&amp;rdquo; papers, in that they have had some important influence on their respective subdisciplines. Most are less than 30 pages  Languages &amp;amp; Runtimes The Smalltalk-76 Programming System Design and Implementation, Ingals [S] Describes the Smalltalk system of communicating objects, and includes an example of the Smalltalk-76 interpreter written in itself in the appendix.</description>
     </item>
     
     <item>
