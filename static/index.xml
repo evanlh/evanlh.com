@@ -6,7 +6,19 @@
     <description>Recent content on varchar(255)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Sep 2021 00:00:00 -0400</lastBuildDate><atom:link href="http://evanlh.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Nov 2021 00:00:00 -0500</lastBuildDate><atom:link href="http://evanlh.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Gospel of Evan (which is not a true dao)</title>
+      <link>http://evanlh.com/posts/gospel_of_evan/</link>
+      <pubDate>Thu, 18 Nov 2021 00:00:00 -0500</pubDate>
+      
+      <guid>http://evanlh.com/posts/gospel_of_evan/</guid>
+      <description>These are a few meditations&amp;ndash; parables, poems&amp;ndash; I&amp;rsquo;m collecting&amp;ndash; snipping, stealing&amp;ndash; attempting to capture the vague &amp;amp; very provisional learnings I&amp;rsquo;ve had working in the software industry. It&amp;rsquo;s a &amp;ldquo;gospel&amp;rdquo; because, well, everyone is either preaching or selling you snake-oil&amp;ndash; lean into it, write your own gospel, what&amp;rsquo;s the worst that could happen?
+  Have a mission.
+  Respect &amp;amp; learn from your ancestors.
+  Aim for utmost minimalism at your public interface.</description>
+    </item>
+    
     <item>
       <title>A short-list of short, grokkable, &amp; influential CS papers</title>
       <link>http://evanlh.com/posts/foundations/</link>
