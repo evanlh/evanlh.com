@@ -6,7 +6,18 @@
     <description>Recent content in Posts on varchar(255)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 18 Nov 2021 00:00:00 -0500</lastBuildDate><atom:link href="http://evanlh.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 29 Nov 2021 00:00:00 -0500</lastBuildDate><atom:link href="http://evanlh.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Metaphors We Learn to Program By</title>
+      <link>http://evanlh.com/posts/metaphors/</link>
+      <pubDate>Mon, 29 Nov 2021 00:00:00 -0500</pubDate>
+      
+      <guid>http://evanlh.com/posts/metaphors/</guid>
+      <description>I&amp;rsquo;m working through Metaphors We Live By, an exploration of the role of metaphor in human cognition and language. The central theme of the book is:
+ [..] human thought processes are largely metaphorical. [..] Metaphors as linguistic expressions are possible precisely because there are metaphors in a person’s conceptual system.
+ They provide examples of conceptual metaphors which ground our experience&amp;ndash; ARGUMENT IS WAR, HAPPY IS UP, THEORIES ARE BUILDINGS&amp;ndash; and examples from everyday language to support the theory.</description>
+    </item>
+    
     <item>
       <title>The Gospel of Evan: a not true dao of development</title>
       <link>http://evanlh.com/posts/gospel_of_evan/</link>

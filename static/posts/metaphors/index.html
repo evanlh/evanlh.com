@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Metaphors We Learn to Program By | varchar(255)</title>
+  <link rel = 'canonical' href = 'http://evanlh.com/posts/metaphors/'>
+  <meta name="description" content="Hi, I&#39;m Evan. I&#39;ve been learning to code for about as long as I can remember. I sure do have a lot left to learn tho. Sharing here some of that journey.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="Metaphors We Learn to Program By" />
+<meta property="og:description" content="I&rsquo;m working through Metaphors We Live By, an exploration of the role of metaphor in human cognition and language. The central theme of the book is:
+ [..] human thought processes are largely metaphorical. [..] Metaphors as linguistic expressions are possible precisely because there are metaphors in a person’s conceptual system.
+ They provide examples of conceptual metaphors which ground our experience&ndash; ARGUMENT IS WAR, HAPPY IS UP, THEORIES ARE BUILDINGS&ndash; and examples from everyday language to support the theory." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://evanlh.com/posts/metaphors/" /><meta property="og:image" content="http://evanlh.com/images/octopus-1200x800.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-11-29T00:00:00-05:00" />
+<meta property="article:modified_time" content="2021-11-29T00:00:00-05:00" />
+
+
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://evanlh.com/images/octopus-1200x800.png"/>
+
+<meta name="twitter:title" content="Metaphors We Learn to Program By"/>
+<meta name="twitter:description" content="I&rsquo;m working through Metaphors We Live By, an exploration of the role of metaphor in human cognition and language. The central theme of the book is:
+ [..] human thought processes are largely metaphorical. [..] Metaphors as linguistic expressions are possible precisely because there are metaphors in a person’s conceptual system.
+ They provide examples of conceptual metaphors which ground our experience&ndash; ARGUMENT IS WAR, HAPPY IS UP, THEORIES ARE BUILDINGS&ndash; and examples from everyday language to support the theory."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="http://evanlh.com/css/styles.65de21a55c4b3a38580338f7de9460ec576dc7dcf8c3c5454d53c074571fc4cc0243fa3f782bd5fe70bc5b3672b3852ed702eb0b4a39acbb1b5868880f8317b0.css" integrity="sha512-Zd4hpVxLOjhYAzj33pRg7Fdtx9z4w8VFTVPAdFcfxMwCQ/o/eCvV/nC8WzZys4Uu1wLrC0o5rLsbWGiID4MXsA=="> 
+
+  
+   <link rel="stylesheet" href="http://evanlh.com/css/custom.css"> 
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="http://evanlh.com/images/favicon.ico" />
+
+  
+  
+  
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-24869722-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts">All posts</a></li>
+         
+        <li><a href="/posts/about/">About</a></li>
+         
+        <li><a href="/index.xml">RSS</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" http://evanlh.com/posts/gospel_of_evan/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f&text=Metaphors%20We%20Learn%20to%20Program%20By" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f&title=Metaphors%20We%20Learn%20to%20Program%20By" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f&is_video=false&description=Metaphors%20We%20Learn%20to%20Program%20By" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=Metaphors%20We%20Learn%20to%20Program%20By&body=Check out this article: http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f&title=Metaphors%20We%20Learn%20to%20Program%20By" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f&title=Metaphors%20We%20Learn%20to%20Program%20By" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f&name=Metaphors%20We%20Learn%20to%20Program%20By&description=I%26rsquo%3bm%20working%20through%20Metaphors%20We%20Live%20By%2c%20an%20exploration%20of%20the%20role%20of%20metaphor%20in%20human%20cognition%20and%20language.%20The%20central%20theme%20of%20the%20book%20is%3a%0a%20%5b..%5d%20human%20thought%20processes%20are%20largely%20metaphorical.%20%5b..%5d%20Metaphors%20as%20linguistic%20expressions%20are%20possible%20precisely%20because%20there%20are%20metaphors%20in%20a%20person%e2%80%99s%20conceptual%20system.%0a%20They%20provide%20examples%20of%20conceptual%20metaphors%20which%20ground%20our%20experience%26ndash%3b%20ARGUMENT%20IS%20WAR%2c%20HAPPY%20IS%20UP%2c%20THEORIES%20ARE%20BUILDINGS%26ndash%3b%20and%20examples%20from%20everyday%20language%20to%20support%20the%20theory." aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f&t=Metaphors%20We%20Learn%20to%20Program%20By" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-basic-physical-metaphors">The basic physical metaphors</a></li>
+    <li><a href="#non-physical-metaphors">Non-physical metaphors</a></li>
+    <li><a href="#metaphors-of-delegation">Metaphors of delegation</a></li>
+    <li><a href="#questions-of-pedagogy">Questions of pedagogy</a></li>
+  </ul>
+</nav>
+    </div>
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        Metaphors We Learn to Program By
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2021-11-29 00:00:00 -0500 -0500" itemprop="datePublished">2021-11-29</time>
+          
+        </div>
+        
+        
+        
+        
+      </div>
+    </header>
+
+  
+    <div class="content" itemprop="articleBody">
+      <p>I&rsquo;m working through <a href="https://press.uchicago.edu/ucp/books/book/chicago/M/bo3637992.html">Metaphors We Live By</a>, an exploration of the role of metaphor in human cognition and language. The central theme of the book is:</p>
+<blockquote>
+<p>[..] human thought processes are largely metaphorical. [..] Metaphors as linguistic expressions are possible precisely because there are metaphors in a person’s conceptual system.</p>
+</blockquote>
+<p>They provide examples of conceptual metaphors which ground our experience&ndash; <code>ARGUMENT IS WAR</code>, <code>HAPPY IS UP</code>, <code>THEORIES ARE BUILDINGS</code>&ndash; and examples from everyday language to support the theory. They note:</p>
+<blockquote>
+<p>Most of our fundamental concepts are organized in terms of one or more spatialization metaphors.</p>
+</blockquote>
+<p>And in particular, <code>CONTAINERS</code> and <code>PERSONIFICATION</code> fundamentally ground our experience. Containers because:</p>
+<blockquote>
+<p>We are physical beings, bounded and set off from the rest of the world by the surface of our skins, and we experience the rest of the world as outside us. Each of us is a container, with a bounding surface and an in-out orientation. We project our own in-out orientation onto other physical objects that are bounded by surfaces. Thus we also view them as containers with an inside and an outside. [..] But even where there is no natural physical boundary that can be viewed as defining a container, we impose boundaries—marking off territory so that it has an inside and a bounding surface—whether a wall, a fence, or an abstract line or plane. There are few human instincts more basic than territoriality.</p>
+</blockquote>
+<p>This primacy of <code>CONTAINERS</code> and <code>PERSONIFICATION</code> reminded me of my earlier post&rsquo;s <a href="../hash_efficiency/">&ldquo;little man&rdquo;</a> analogy&ndash; telling a little man how to run around your computer moving variously shaped objects in &amp; out of containers for me captures a <em>curiously large amount</em> of what this activity we call &lsquo;programming&rsquo; is about.</p>
+<h2 id="the-basic-physical-metaphors">The basic physical metaphors</h2>
+<p>Most common data structures obviously fit into the <code>CONTAINER</code> metaphor because they&rsquo;re, well, <a href="https://en.wikipedia.org/wiki/Container%5F(abstract%5Fdata%5Ftype)">containers</a>. I find it useful to imagine them spatially:</p>
+<ul>
+<li>A map or dictionary is an old school wall of post-office boxes with labels on the drawers. The labels on the boxes are the keys, and whatever is contained within the box is the value.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+<li>A linked list is a row of boxes on a conveyer belt which can only go forward. (Doubly linked lists let me convey the boxes forward &amp; backwards.)</li>
+<li>A binary tree is a box with two drawers, which opens into a box with two drawers, which opens into&hellip;</li>
+</ul>
+<p>Of course I&rsquo;m not saying I visualize a conveyer belt when walking a linked list. What I want to emphasize is the sense in which, <em>reading code can translate into a physical, kinetic feeling</em>. I posit the degree to which I am can effectively use a data structure is related to how strong this kinetic sense of it is.</p>
+<p>Another metaphor I typically employ to help with that kinetic sense of things is one in which there is a &ldquo;person moving about space&rdquo;. For example:</p>
+<ul>
+<li>Database cursors represent a person gathering a stack of records</li>
+<li>The instruction pointer represents a person reading the code line-by-line &amp; interpreting it</li>
+<li>A loop counter or iterable represents a person holding a place in a rolodex, list, or other structure, perhaps by pointing with their <code>index</code> finger.</li>
+</ul>
+<p>All of these are people systematically scanning over some contained information, keeping track of their place, and perhaps manipulating whatever has been put within their grasp. There&rsquo;s no obvious reason to conceive of these as a person&ndash; it&rsquo;s just an abstract arrow moving thru space and/or time&ndash; but for some reason it&rsquo;s natural to personify it, especially when debugging, when <em>I need to tell the little person where s/he made a wrong turn</em>.</p>
+<p>&hellip; think about how much of your daily coding can be encompassed by those two metaphors!</p>
+<h2 id="non-physical-metaphors">Non-physical metaphors</h2>
+<p>There are programming constructs which don&rsquo;t to me have obvious physical analogs&ndash; interfaces, types, protocols, recursion&ndash; but I want to briefly mention <em>language syntax</em>. Unlike the others, learning most programming environment&rsquo;s syntax is a pre-requisite to using it at all, but can also be a significant stumbling block. <a href="https://scratch.mit.edu">Scratch</a> and other block-based programming environments are <a href="https://web.media.mit.edu/~mres/papers/Scratch-CACM-final.pdf">explicitly designed</a> to overcome this difficulty with syntax&ndash; and they succeed by replacing it with a <code>CONTAINER</code> metaphor! Replacing formal language&ndash; acquired only with great effort well after our physical senses&ndash; in this way seems a stroke of pedagogical genius.</p>
+<h2 id="metaphors-of-delegation">Metaphors of delegation</h2>
+<p>Beyond the scale of toy programs, it becomes necessary to employ abstractions that reduce the immediately apparent complexity of the problem at-hand. There is an interesting thing which happens when one proceeds thru the different ways of doing this, from imperative to object-oriented, functional, &amp; relational:</p>
+<ul>
+<li>A procedure is a command to a wily subordinate: &ldquo;go do this&rdquo;. Despite their subordinate status, you don&rsquo;t get a lot of control over what else they do while they&rsquo;re gone.</li>
+<li>We send messages (commands or requests)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> to an object, which may contain multitudes. Even tho we have no sense of how many multitudes are contained, &ldquo;best practices&rdquo; assure us the object will only transform that which it contains.</li>
+<li>A pure function is an exchange with an equal. I give the function some information, it gives me back other information which relates to what I gave it in a predictable way. They never leave the room, so there&rsquo;s no possibility of a <a href="https://en.wikipedia.org/wiki/The%5FSorcerer%27s%5FApprentice">sorcerer&rsquo;s apprentice</a> situation like the others.</li>
+<li>A database query is a request &ndash; perhaps even a supplication?&ndash; to an all-knowing <a href="https://www.oracle.com/">oracle</a>. They will respond with what they can at a time of their choosing. I&rsquo;m at their mercy.</li>
+</ul>
+<p>Notice how the balance of power shifts from the programmer to the abstraction? We also seem to move away from a tangible physical paradigm here&ndash; the delegatee&rsquo;s person-hood transforms. In procedures there is a &ldquo;little person&rdquo; who will finish the work &amp; <code>return</code> to us. If we have to fix something we can always follow the little person thru their steps. By the time we get to relational the problem becomes one of forming unambiguous questions to a <a href="https://tvtropes.org/pmwiki/pmwiki.php/Main/LiteralGenie">literal genie</a>. Legends warn of the perils of this situation!</p>
+<p>Nevertheless, fighting the instinct to control is necessary, or you might end up with an ad-hoc, unqueryable, bug-ridden<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> <del>database</del> stack of containers. Unless your application&rsquo;s scale or complexity requires <a href="https://martin.kleppmann.com/2015/11/05/database-inside-out-at-oredev.html">turning the database inside out</a>, it should probably be just a thin shell around a <a href="https://www.sqlite.org/">battle-hardened embedded database</a>. &ldquo;You are either building a database or a compiler&rdquo;<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>, and you should be very certain you can&rsquo;t re-use parts of ones that already work.</p>
+<h2 id="questions-of-pedagogy">Questions of pedagogy</h2>
+<p>In an <a href="/posts/gospel_of_evan/">earlier post</a> I claimed: &ldquo;We employ the industrial [metaphors] too often— builder, adaptor, factory. We need more pre/post-industrial ones— they’re more powerful.&rdquo; Despite having spent most of my time developing in the object-oriented and imperative paradigms, <a href="https://www.recurse.com/blog/51-paper-of-the-week-out-of-the-tar-pit">Out of the Tar Pit</a>, <a href="https://sci-hub.se/https://doi.org/10.1145/359576.359579">Can programming be liberated&hellip;</a> and others have convinced me that, as an industry, we ought to be employing the functional &amp; relational paradigms to a greater degree than we currently do. This belief sits uncomfortably with my current inability to see how they&rsquo;re rooted in the <code>CONTAINER</code> or <code>PERSONIFICATION</code> paradigms. I would love to hear educated opinions on this&ndash; I will close with the two questions I&rsquo;m specifically interested in, which seem to be in tension with one another:</p>
+<ul>
+<li><strong>Whether we could do more to make programming an accessible activity to the 99% of people who don&rsquo;t program, by emphasizing the physical analogs during language learning?</strong>
+<ul>
+<li>Were physical metaphors like the ones described useful to you when learning to program? Are they still useful to you?</li>
+<li>How do your physical conceptions of common programming constructs differ from what I&rsquo;ve described?</li>
+</ul>
+</li>
+<li><strong>Whether the embodied programming metaphors we are accustomed to are the best ones to be using &amp; teaching?</strong>
+<ul>
+<li>Can the functional and relational paradigms be well-represented in physical terms, giving the reader a kinetic sense of the code? Or do they imply an internalized-but-forgotten &ldquo;little person&rdquo;?</li>
+<li>Could a richer development of <code>PERSONIFICATION</code> be part of this?</li>
+</ul>
+</li>
+</ul>
+<p>Would love to hear from you on Twitter or HN.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Obviously &ldquo;maps&rdquo; and &ldquo;dictionaries&rdquo; are also real physical things which analogize well to this data structure, but what they <em>contain</em> is significantly more abstract than a postbox. In particular, it bothers me that the contained value exists in a lower spatial dimension.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>There are a lot of ways in which objects straddle paradigms here. <a href="http://userpage.fu-berlin.de/~ram/pub/pub%5Fjf47ht81Ht/doc%5Fkay%5Foop%5Fen">Alan Kay says</a> he was thinking of &ldquo;cells&rdquo; and a biological paradigm, which has a kind of <code>PERSONIFICATION</code> to it. Yet of course cells and the more static &ldquo;objects&rdquo; are also <code>CONTAINERS</code>. Then there is the question of tense&ndash; with <a href="https://en.wikipedia.org/wiki/Late%5Fbinding">late-binding</a>, the locus of control is <strong>inside</strong> the object so the tense is somewhat tentative. Without that, a method call differs little from an order, in which the locus of control stays <strong>outside</strong> the object.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>Nod to <a href="https://en.wikipedia.org/wiki/Greenspun%27s%5Ftenth%5Frule">Greenspun&rsquo;s tenth rule</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>I love this maxim but I&rsquo;ve lost the citation for it! Please <a href="https://twitter.com/evanlh">tell me if you know</a>.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/posts">All posts</a></li>
+         
+          <li><a href="/posts/about/">About</a></li>
+         
+          <li><a href="/index.xml">RSS</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-basic-physical-metaphors">The basic physical metaphors</a></li>
+    <li><a href="#non-physical-metaphors">Non-physical metaphors</a></li>
+    <li><a href="#metaphors-of-delegation">Metaphors of delegation</a></li>
+    <li><a href="#questions-of-pedagogy">Questions of pedagogy</a></li>
+  </ul>
+</nav>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f&text=Metaphors%20We%20Learn%20to%20Program%20By" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f&title=Metaphors%20We%20Learn%20to%20Program%20By" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f&is_video=false&description=Metaphors%20We%20Learn%20to%20Program%20By" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=Metaphors%20We%20Learn%20to%20Program%20By&body=Check out this article: http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f&title=Metaphors%20We%20Learn%20to%20Program%20By" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f&title=Metaphors%20We%20Learn%20to%20Program%20By" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f&name=Metaphors%20We%20Learn%20to%20Program%20By&description=I%26rsquo%3bm%20working%20through%20Metaphors%20We%20Live%20By%2c%20an%20exploration%20of%20the%20role%20of%20metaphor%20in%20human%20cognition%20and%20language.%20The%20central%20theme%20of%20the%20book%20is%3a%0a%20%5b..%5d%20human%20thought%20processes%20are%20largely%20metaphorical.%20%5b..%5d%20Metaphors%20as%20linguistic%20expressions%20are%20possible%20precisely%20because%20there%20are%20metaphors%20in%20a%20person%e2%80%99s%20conceptual%20system.%0a%20They%20provide%20examples%20of%20conceptual%20metaphors%20which%20ground%20our%20experience%26ndash%3b%20ARGUMENT%20IS%20WAR%2c%20HAPPY%20IS%20UP%2c%20THEORIES%20ARE%20BUILDINGS%26ndash%3b%20and%20examples%20from%20everyday%20language%20to%20support%20the%20theory." aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=http%3a%2f%2fevanlh.com%2fposts%2fmetaphors%2f&t=Metaphors%20We%20Learn%20to%20Program%20By" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2021  varchar(255) 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts">All posts</a></li>
+         
+        <li><a href="/posts/about/">About</a></li>
+         
+        <li><a href="/index.xml">RSS</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+<script src=/js/code-copy.js></script>
+
+
+
+</html>
