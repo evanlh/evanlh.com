@@ -180,10 +180,10 @@ if (!doNotTrack) {
     <div id="toc">
       <nav id="TableOfContents">
   <ul>
-    <li><a href="#the-basic-physical-metaphors">The basic physical metaphors</a></li>
-    <li><a href="#non-physical-metaphors">Non-physical metaphors</a></li>
-    <li><a href="#metaphors-of-delegation">Metaphors of delegation</a></li>
-    <li><a href="#questions-of-pedagogy">Questions of pedagogy</a></li>
+    <li><a href="#the-basic-physical-metaphors-️">The basic physical metaphors 📦🏃‍♂️</a></li>
+    <li><a href="#non-physical-metaphors">Non-physical metaphors 📝</a></li>
+    <li><a href="#metaphors-of-delegation">Metaphors of delegation 🗣</a></li>
+    <li><a href="#questions-of-pedagogy">Questions of pedagogy 🎓</a></li>
   </ul>
 </nav>
     </div>
@@ -225,7 +225,7 @@ if (!doNotTrack) {
 <p>We are physical beings, bounded and set off from the rest of the world by the surface of our skins, and we experience the rest of the world as outside us. Each of us is a container, with a bounding surface and an in-out orientation. We project our own in-out orientation onto other physical objects that are bounded by surfaces. Thus we also view them as containers with an inside and an outside. [..] But even where there is no natural physical boundary that can be viewed as defining a container, we impose boundaries—marking off territory so that it has an inside and a bounding surface—whether a wall, a fence, or an abstract line or plane. There are few human instincts more basic than territoriality.</p>
 </blockquote>
 <p>This primacy of <code>CONTAINERS</code> and <code>PERSONIFICATION</code> reminded me of my earlier post&rsquo;s <a href="../hash_efficiency/">&ldquo;little man&rdquo;</a> analogy&ndash; telling a little man how to run around your computer moving variously shaped objects in &amp; out of containers for me captures a <em>curiously large amount</em> of what this activity we call &lsquo;programming&rsquo; is about.</p>
-<h2 id="the-basic-physical-metaphors">The basic physical metaphors</h2>
+<h2 id="the-basic-physical-metaphors-️">The basic physical metaphors 📦🏃‍♂️</h2>
 <p>Most common data structures obviously fit into the <code>CONTAINER</code> metaphor because they&rsquo;re, well, <a href="https://en.wikipedia.org/wiki/Container%5F(abstract%5Fdata%5Ftype)">containers</a>. I find it useful to imagine them spatially:</p>
 <ul>
 <li>A map or dictionary is an old school wall of post-office boxes with labels on the drawers. The labels on the boxes are the keys, and whatever is contained within the box is the value.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
@@ -241,9 +241,9 @@ if (!doNotTrack) {
 </ul>
 <p>All of these are people systematically scanning over some contained information, keeping track of their place, and perhaps manipulating whatever has been put within their grasp. There&rsquo;s no obvious reason to conceive of these as a person&ndash; it&rsquo;s just an abstract arrow moving thru space and/or time&ndash; but it feels natural to personify it, especially when debugging, so I can step inside their shoes and <em>tell the little person where s/he made a wrong turn</em>.</p>
 <p>&hellip; think about how much of your daily coding can be encompassed by those two metaphors!</p>
-<h2 id="non-physical-metaphors">Non-physical metaphors</h2>
-<p>There are programming constructs which don&rsquo;t to me have obvious physical analogs&ndash; interfaces, types, protocols, recursion&ndash; but I want to briefly mention <em>language syntax</em>. Unlike the others, learning most programming environment&rsquo;s syntax is a pre-requisite to using it at all, but can also be a significant stumbling block. <a href="https://scratch.mit.edu">Scratch</a> and other block-based programming environments are <a href="https://web.media.mit.edu/~mres/papers/Scratch-CACM-final.pdf">explicitly designed</a> to overcome this difficulty with syntax&ndash; and they succeed by replacing it with a <code>CONTAINER</code> metaphor! Replacing formal language&ndash; acquired only with great effort well after our physical senses&ndash; in this way seems a stroke of pedagogical genius.</p>
-<h2 id="metaphors-of-delegation">Metaphors of delegation</h2>
+<h2 id="non-physical-metaphors">Non-physical metaphors 📝</h2>
+<p>There are programming constructs which don&rsquo;t to me have obvious physical analogs&ndash; interfaces, types, protocols, recursion&ndash; but I want to highlight <em>language syntax</em>. Unlike the others, learning most programming environment&rsquo;s syntax is a pre-requisite to using it at all, but can also be a significant stumbling block. <a href="https://scratch.mit.edu">Scratch</a> and other block-based programming environments are <a href="https://web.media.mit.edu/~mres/papers/Scratch-CACM-final.pdf">explicitly designed</a> to overcome this difficulty with syntax&ndash; and they succeed by replacing it with a <code>CONTAINER</code> metaphor! Replacing formal language&ndash; acquired only with great effort well after our physical senses&ndash; in this way seems a stroke of pedagogical genius.</p>
+<h2 id="metaphors-of-delegation">Metaphors of delegation 🗣</h2>
 <p>Beyond the scale of toy programs, it becomes necessary to employ abstractions that reduce the immediately apparent complexity of the problem at-hand. There is an interesting thing which happens when one proceeds thru the different ways of doing this, from imperative to object-oriented, functional, &amp; relational:</p>
 <ul>
 <li>A procedure is a command to a wily subordinate: &ldquo;go do this&rdquo;. Despite their subordinate status, you don&rsquo;t get a lot of control over what else they do while they&rsquo;re gone.</li>
@@ -252,17 +252,17 @@ if (!doNotTrack) {
 <li>A database query is a request &ndash; perhaps even a supplication?&ndash; to an all-knowing <a href="https://www.oracle.com/">oracle</a>. They will respond with what they can at a time of their choosing. I&rsquo;m at their mercy.</li>
 </ul>
 <p>Notice how the balance of power shifts from the programmer to the abstraction? We also seem to move away from a tangible physical paradigm here&ndash; the delegatee&rsquo;s person-hood transforms. In procedures there is a &ldquo;little person&rdquo; who will finish the work &amp; <code>return</code> to us. If we have to fix something we can always follow the little person thru their steps. By the time we get to relational the problem becomes one of forming unambiguous questions to a <a href="https://tvtropes.org/pmwiki/pmwiki.php/Main/LiteralGenie">literal genie</a>. Legends warn of the perils of this situation!</p>
-<p>Nevertheless, fighting the instinct to control is necessary, or you might end up with an ad-hoc, unqueryable, bug-ridden<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> <del>database</del> stack of containers. Unless your application&rsquo;s scale or complexity requires <a href="https://martin.kleppmann.com/2015/11/05/database-inside-out-at-oredev.html">turning the database inside out</a>, it should probably be just a thin shell around a <a href="https://www.sqlite.org/">battle-hardened embedded database</a>. &ldquo;You are either building a database or a compiler&rdquo;<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>, and you should be very certain you can&rsquo;t re-use parts of ones that already work.</p>
-<h2 id="questions-of-pedagogy">Questions of pedagogy</h2>
-<p>In an <a href="/posts/gospel_of_evan/">earlier post</a> I claimed: &ldquo;We employ the industrial [metaphors] too often— builder, adaptor, factory. We need more pre/post-industrial ones— they’re more powerful.&rdquo; Despite having spent most of my time developing in the object-oriented and imperative paradigms, <a href="https://www.recurse.com/blog/51-paper-of-the-week-out-of-the-tar-pit">Out of the Tar Pit</a>, <a href="https://sci-hub.se/https://doi.org/10.1145/359576.359579">Can programming be liberated&hellip;</a> and others have convinced me that, as an industry, we ought to be employing the functional &amp; relational paradigms to a greater degree than we currently do. This belief sits uncomfortably with my current inability to see how they&rsquo;re rooted in the <code>CONTAINER</code> or <code>PERSONIFICATION</code> paradigms. I would love to hear educated opinions on this&ndash; I will close with the two questions I&rsquo;m specifically interested in, which seem to be in tension with one another:</p>
+<p>Nevertheless, fighting the instinct to control is necessary, or you could end up with an ad-hoc, unqueryable, bug-ridden<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> <del>database</del> stack of containers. Unless your application&rsquo;s scale or complexity requires <a href="https://martin.kleppmann.com/2015/11/05/database-inside-out-at-oredev.html">turning the database inside out</a>, it should probably be just a thin shell around a <a href="https://www.sqlite.org/">battle-hardened embedded database</a>. &ldquo;You are either building a database or a compiler&rdquo;<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>, and you should be very certain you can&rsquo;t re-use parts of ones that already work.</p>
+<h2 id="questions-of-pedagogy">Questions of pedagogy 🎓</h2>
+<p>In an <a href="/posts/gospel_of_evan/">earlier post</a> I claimed: &ldquo;We employ the industrial [metaphors] too often— builder, adaptor, factory. We need more pre/post-industrial ones— they’re more powerful.&rdquo; Despite having spent most of my time developing in the object-oriented and imperative paradigms, <a href="https://www.recurse.com/blog/51-paper-of-the-week-out-of-the-tar-pit">Out of the Tar Pit</a>, <a href="https://sci-hub.se/https://doi.org/10.1145/359576.359579">Can programming be liberated&hellip;</a> and others have convinced me that, as an industry, we ought to be employing the functional &amp; relational paradigms to a greater degree than we currently do. This belief sits uncomfortably with my current inability to see how they&rsquo;re rooted in the <code>CONTAINER</code> or <code>PERSONIFICATION</code> paradigms. I would love to hear your opinions on this&ndash; in closing, I&rsquo;m led to two major question, which seem to be in tension with one another:</p>
 <ul>
-<li><strong>Whether we could do more to make programming an accessible activity to the 99% of people who don&rsquo;t program, by emphasizing the physical analogs during language learning?</strong>
+<li><strong>Could we do more to make programming an accessible activity to the 99% of people who don&rsquo;t program, by putting greater emphasis on intuitive physical analogs?</strong>
 <ul>
 <li>Were physical metaphors like the ones described useful to you when learning to program? Are they still useful to you?</li>
 <li>How do your physical conceptions of common programming constructs differ from what I&rsquo;ve described?</li>
 </ul>
 </li>
-<li><strong>Whether the embodied programming metaphors we are accustomed to are the best ones to be using &amp; teaching?</strong>
+<li><strong>Are the embodied, imperative metaphors we&rsquo;ve inherited the best ones to be teaching?</strong>
 <ul>
 <li>Can the functional and relational paradigms be well-represented in physical terms, giving the reader a kinetic sense of the code? Or do they imply an internalized-but-forgotten &ldquo;little person&rdquo;?</li>
 <li>Could a richer development of <code>PERSONIFICATION</code> be part of this?</li>
@@ -318,10 +318,10 @@ if (!doNotTrack) {
     <div id="toc-footer" style="display: none">
       <nav id="TableOfContents">
   <ul>
-    <li><a href="#the-basic-physical-metaphors">The basic physical metaphors</a></li>
-    <li><a href="#non-physical-metaphors">Non-physical metaphors</a></li>
-    <li><a href="#metaphors-of-delegation">Metaphors of delegation</a></li>
-    <li><a href="#questions-of-pedagogy">Questions of pedagogy</a></li>
+    <li><a href="#the-basic-physical-metaphors-️">The basic physical metaphors 📦🏃‍♂️</a></li>
+    <li><a href="#non-physical-metaphors">Non-physical metaphors 📝</a></li>
+    <li><a href="#metaphors-of-delegation">Metaphors of delegation 🗣</a></li>
+    <li><a href="#questions-of-pedagogy">Questions of pedagogy 🎓</a></li>
   </ul>
 </nav>
     </div>
