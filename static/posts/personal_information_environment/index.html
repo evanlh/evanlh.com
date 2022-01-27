@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Finding the seams in information space | varchar(255)</title>
+  <link rel = 'canonical' href = 'http://evanlh.com/posts/personal_information_environment/'>
+  <meta name="description" content="Hi, I&#39;m Evan. I&#39;ve been learning to code for about as long as I can remember. I sure do have a lot left to learn tho. Sharing here some of that journey.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="Finding the seams in information space" />
+<meta property="og:description" content="I&rsquo;m really excited by the research effort proposed in Towards a Dynamic Multiscale Personal Information Space, a 2020 paper advocating more &lsquo;convivial&rsquo;1 information spaces. As the authors describe it, when a user interacts with the computer:
+ The system offers a novel interface to her digital information, consolidating her data (e.g., email, messages, calendars, web pages, notes, sketches, and analyses and visualizations) across applications. When she interacts with the information in her workspace, it seems to be alive, aware of when and how it was last used, and sometimes even why she was using it." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://evanlh.com/posts/personal_information_environment/" /><meta property="og:image" content="http://evanlh.com/images/octopus-1200x800.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-26T00:00:00-05:00" />
+<meta property="article:modified_time" content="2022-01-26T00:00:00-05:00" />
+
+
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://evanlh.com/images/octopus-1200x800.png"/>
+
+<meta name="twitter:title" content="Finding the seams in information space"/>
+<meta name="twitter:description" content="I&rsquo;m really excited by the research effort proposed in Towards a Dynamic Multiscale Personal Information Space, a 2020 paper advocating more &lsquo;convivial&rsquo;1 information spaces. As the authors describe it, when a user interacts with the computer:
+ The system offers a novel interface to her digital information, consolidating her data (e.g., email, messages, calendars, web pages, notes, sketches, and analyses and visualizations) across applications. When she interacts with the information in her workspace, it seems to be alive, aware of when and how it was last used, and sometimes even why she was using it."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="http://evanlh.com/css/styles.65de21a55c4b3a38580338f7de9460ec576dc7dcf8c3c5454d53c074571fc4cc0243fa3f782bd5fe70bc5b3672b3852ed702eb0b4a39acbb1b5868880f8317b0.css" integrity="sha512-Zd4hpVxLOjhYAzj33pRg7Fdtx9z4w8VFTVPAdFcfxMwCQ/o/eCvV/nC8WzZys4Uu1wLrC0o5rLsbWGiID4MXsA=="> 
+
+  
+   <link rel="stylesheet" href="http://evanlh.com/css/custom.css"> 
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="http://evanlh.com/images/favicon.ico" />
+
+  
+  
+  
+  
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-24869722-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts">All posts</a></li>
+         
+        <li><a href="/posts/about/">About</a></li>
+         
+        <li><a href="/index.xml">RSS</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" http://evanlh.com/posts/metaphors/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f&text=Finding%20the%20seams%20in%20information%20space" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f&title=Finding%20the%20seams%20in%20information%20space" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f&is_video=false&description=Finding%20the%20seams%20in%20information%20space" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=Finding%20the%20seams%20in%20information%20space&body=Check out this article: http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f&title=Finding%20the%20seams%20in%20information%20space" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f&title=Finding%20the%20seams%20in%20information%20space" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f&name=Finding%20the%20seams%20in%20information%20space&description=I%26rsquo%3bm%20really%20excited%20by%20the%20research%20effort%20proposed%20in%20Towards%20a%20Dynamic%20Multiscale%20Personal%20Information%20Space%2c%20a%202020%20paper%20advocating%20more%20%26lsquo%3bconvivial%26rsquo%3b1%20information%20spaces.%20As%20the%20authors%20describe%20it%2c%20when%20a%20user%20interacts%20with%20the%20computer%3a%0a%20The%20system%20offers%20a%20novel%20interface%20to%20her%20digital%20information%2c%20consolidating%20her%20data%20%28e.g.%2c%20email%2c%20messages%2c%20calendars%2c%20web%20pages%2c%20notes%2c%20sketches%2c%20and%20analyses%20and%20visualizations%29%20across%20applications.%20When%20she%20interacts%20with%20the%20information%20in%20her%20workspace%2c%20it%20seems%20to%20be%20alive%2c%20aware%20of%20when%20and%20how%20it%20was%20last%20used%2c%20and%20sometimes%20even%20why%20she%20was%20using%20it." aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f&t=Finding%20the%20seams%20in%20information%20space" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <nav id="TableOfContents"></nav>
+    </div>
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        Finding the seams in information space
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2022-01-26 00:00:00 -0500 -0500" itemprop="datePublished">2022-01-26</time>
+          
+        </div>
+        
+        
+        
+        
+      </div>
+    </header>
+
+  
+    <div class="content" itemprop="articleBody">
+      <p>I&rsquo;m really excited by the research effort proposed in <a href="https://dl.acm.org/doi/abs/10.1145/3397537.3397542">Towards a Dynamic Multiscale Personal Information Space</a>, a 2020 paper advocating more &lsquo;convivial&rsquo;<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> information spaces. As the authors describe it, when a user interacts with the computer:</p>
+<blockquote>
+<p>The system offers a novel interface to her digital information, consolidating her data (e.g., email, messages, calendars, web pages, notes, sketches, and analyses and visualizations) across applications. When she interacts with the information in her workspace, it seems to be alive, aware of when and how it was last used, and sometimes even why she was using it.
+To get back to her writing, Samantha browses a timeline of her past working sessions. She vaguely remembers last searching the web for
+an article she’d once read, but now can’t remember if she successfully found and referenced it. She scrubs through the visualization of her activity to before she left for the conference. This timeline, like the workspace itself, is multiscale, enabling her to move up and down levels of abstraction. She shifts to a level where only major activities (like a session of data analysis, writing, or web browsing) are displayed, and sees a familiar view of her text editor. When she clicks it, the image centers and thumbnails of all the other applications that were open cluster around it.</p>
+</blockquote>
+<p>This vision reminds me of a couple 20 year old papers in the PIM space worth your time, like <a href="https://sci-hub.se/http://dx.doi.org/10.1145/319950.323231">Haystack: Per-User Information Environments</a> or <a href="https://sci-hub.se/https://doi.org/10.1145/381854.381893">Lifestreams: A Storage Model for Personal Data</a>:</p>
+<blockquote>
+<p>A lifestream is a time-ordered stream of documents that functions as a diary of your electronic life; every document you create and every document other people send you is stored in your lifestream. The tail of your stream contains documents from the past (starting with your electronic birth certificate). Moving away from the tail and toward the present, your stream contains more recent documents &ndash; papers in progress or new electronic mail; other documents (pictures, correspondence, bills, movies, voice mail, software) are stored in between. Moving beyond the present and into the future, the stream contains documents you will need: reminders, calendar items, to-do lists.</p>
+</blockquote>
+<p>What I like about this latest addition to the <a href="https://sci-hub.se/https://doi.org/10.1145/1897816.1897840">never-ending dream of the Memex</a> is that it&rsquo;s very explicit about how deeply integrated with the Operating System such a system would need to be to be effective:</p>
+<blockquote>
+<p>We call for operating-system- wide activity tracking&hellip; Each of these systems transparently monitors application activity at the OS level, creating a timestamped trace of activities such as which files were opened and/or modified, which system calls were executed, which GUI windows were opened/closed, and which sub-processes were launched.</p>
+</blockquote>
+<p>It&rsquo;s also very explicit, in the sub-title, &ldquo;Beyond application and document centered views of information&rdquo;, where the problem lies. The artificial divide we interpose between code (Applications) and data (Documents) is part of the problem. Breaking down this divide reminds me of the <a href="https://gtoolkit.com">Glamorous Toolkit</a> &ndash; a kind of all-in-one platform fusing knowledge management, IDEs and computational notebooks. To a lesser extend <a href="https://roamresearch.com">Roam Research</a> <a href="https://athensresearch.github.io/docs/">and</a> <a href="https://logseq.github.io">friends</a> embody this OS-like quality, and of course <a href="https://www.gnu.org/software/emacs/">Emacs</a> is the ancestor of all of them.</p>
+<p>Funding models, the difficulty of integrating novel components, and UX concerns all have a tendency to push these applications to becoming a kind of user-specific operating system. But no-one wants their Memex to be or live inside a walled garden. Cloud-based or proprietary second brains are a non-starter for myself for obvious reasons. A healthy ecosystem is a network of interdependencies which can adapt to the loss of non-keystone species. <a href="https://orgmode.org">org-mode</a> doesn&rsquo;t look <em>great</em> inside <a href="https://workingcopyapp.com">Working Copy</a> but it&rsquo;s <em>usable</em>. For composability, what is needed are <a href="https://subconscious.substack.com/p/composability-with-other-tools">common file formats and protocols</a>. This is easier said than done, of course, especially given that iOS <a href="https://jenson.org/files/">barely supports files</a>.</p>
+<p>Still, vision-questing <a href="http://www.wirfs-brock.com/allen/posts/1033">like this</a> seems worthwhile. What would a healthy personal information ecosystem look like? For me:</p>
+<ul>
+<li>It would be <a href="https://www.inkandswitch.com/local-first/">local-first</a>, or at minimum have a sensibly unrestricted offline experience. Your data should be yours, &amp; private by default.</li>
+<li>Your data should synchronize to all of your devices, to the limits of their storage ability, with few to no manual steps required to bring them in sync.</li>
+<li>Maintaining one or more shared, public spaces at different URLs should be as seamless as maintaining your personal Memex.</li>
+<li>A core set of connecting paradigms &amp; affordances would be shared between applications operating in this ecosystem. It seems a bit too early to say <em>what</em> those paradigms should be precisely, but some plausible ones that would benefit from cross-tool integration could be:
+<ul>
+<li>Bidirectional links</li>
+<li>Blocks</li>
+<li>An <a href="https://gtoolkit.com/components/inspector/">Inspector</a> view of entities</li>
+<li>A <a href="https://jupyterlab.readthedocs.io/en/stable/user/notebook.html">Live Notebook</a> or <a href="https://gtoolkit.com/components/coder/">Coder</a> view for inline execution</li>
+<li>Version control</li>
+<li>Link &amp; metadata-aware search</li>
+</ul>
+</li>
+</ul>
+<p>Most of what I see in the space these days are <em>applications</em>. I&rsquo;m more interested in the infrastructural, middleware aspects of this. Where is this work being done?</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>&ldquo;I choose the term “conviviality” to designate the opposite of industrial productivity. I intend it to mean autonomous and creative intercourse among persons, and the intercourse of persons with their environment; and this in contrast with the conditioned response of persons to the demands made upon them by others, and by a man-made environment. I consider conviviality to be individual freedom realized in personal interdependence and, such, an intrinsic ethical value. I believe that, in any society, as conviviality is reduced below a certain level, no amount of industrial productivity can effectively satisfy the needs it creates among society’s members. Illich, Ivan. <a href="https://en.wikipedia.org/wiki/Tools%5Ffor%5FConviviality">Tools for Conviviality (pp. 20-21)</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/posts">All posts</a></li>
+         
+          <li><a href="/posts/about/">About</a></li>
+         
+          <li><a href="/index.xml">RSS</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents"></nav>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f&text=Finding%20the%20seams%20in%20information%20space" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f&title=Finding%20the%20seams%20in%20information%20space" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f&is_video=false&description=Finding%20the%20seams%20in%20information%20space" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=Finding%20the%20seams%20in%20information%20space&body=Check out this article: http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f&title=Finding%20the%20seams%20in%20information%20space" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f&title=Finding%20the%20seams%20in%20information%20space" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f&name=Finding%20the%20seams%20in%20information%20space&description=I%26rsquo%3bm%20really%20excited%20by%20the%20research%20effort%20proposed%20in%20Towards%20a%20Dynamic%20Multiscale%20Personal%20Information%20Space%2c%20a%202020%20paper%20advocating%20more%20%26lsquo%3bconvivial%26rsquo%3b1%20information%20spaces.%20As%20the%20authors%20describe%20it%2c%20when%20a%20user%20interacts%20with%20the%20computer%3a%0a%20The%20system%20offers%20a%20novel%20interface%20to%20her%20digital%20information%2c%20consolidating%20her%20data%20%28e.g.%2c%20email%2c%20messages%2c%20calendars%2c%20web%20pages%2c%20notes%2c%20sketches%2c%20and%20analyses%20and%20visualizations%29%20across%20applications.%20When%20she%20interacts%20with%20the%20information%20in%20her%20workspace%2c%20it%20seems%20to%20be%20alive%2c%20aware%20of%20when%20and%20how%20it%20was%20last%20used%2c%20and%20sometimes%20even%20why%20she%20was%20using%20it." aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=http%3a%2f%2fevanlh.com%2fposts%2fpersonal_information_environment%2f&t=Finding%20the%20seams%20in%20information%20space" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  varchar(255) 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/posts">All posts</a></li>
+         
+        <li><a href="/posts/about/">About</a></li>
+         
+        <li><a href="/index.xml">RSS</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+<script src=/js/code-copy.js></script>
+
+
+
+</html>
