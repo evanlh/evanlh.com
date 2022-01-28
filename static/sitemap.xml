@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://evanlh.com/posts/personal_information_environment/</loc>
+    <loc>http://evanlh.com/posts/</loc>
     <lastmod>2022-01-26T00:00:00-05:00</lastmod>
   </url><url>
-    <loc>http://evanlh.com/posts/</loc>
+    <loc>http://evanlh.com/posts/personal_information_environment/</loc>
     <lastmod>2022-01-26T00:00:00-05:00</lastmod>
   </url><url>
     <loc>http://evanlh.com/</loc>
